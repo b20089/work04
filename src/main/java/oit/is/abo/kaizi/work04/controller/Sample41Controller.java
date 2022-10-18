@@ -40,4 +40,40 @@ public class Sample41Controller {
 
     return "sample41.html";
   }
+
+  @GetMapping("step3")
+
+  public String sample43() {
+    return "sample43.html";
+  }
+
+  @GetMapping("step5")
+  public String sample45() {
+    return "sample45.html";
+  }
+
+  @GetMapping("step6")
+  public String sample46() {
+    return "sample46.html";
+  }
+
+  @PostMapping("step3")
+  @Transactional
+  public String sample43(@RequestParam String chamberName, ModelMap model, Principal prin) {
+    String loginUser = prin.getName(); // ログインユーザ情報
+    Chamber chamber3 = new Chamber();
+    chamber3.setChamberName(chamberName);
+    chamber3.setUserName(loginUser);
+    chamberMapper.insertChamber(chamber3);
+    model.addAttribute("chamber3", chamber3);
+    // System.out.println("ID:" + chamber3.getId());
+    return "sample43.html";
+  }
+
+  @PostMapping("step5")
+  public String sample45(@RequestParam String chamberName, ModelMap model) {
+    ArrayList<Chamber> chambers5 = chamberMapper.selectAllByChamberName(chamberName);
+    model.addAttribute("chambers5", chambers5);
+    return "sample45.html";
+  }
 }
